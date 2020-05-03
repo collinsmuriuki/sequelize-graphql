@@ -5,13 +5,6 @@ import { sequelize } from "../models";
 sequelize
   .authenticate()
   .then(() => {
-    // const { User, Post } = sequelize.models;
-    // Post.findAll({ include: [{ all: true }] }).then((data) =>
-    //   console.log(JSON.stringify(data, null, 2))
-    // );
-    // User.findAll({ include: [{ all: true }] }).then((data) =>
-    //   console.log(JSON.stringify(data, null, 2))
-    // );
     console.log("Connection has been established successfully to Postgres");
   })
   .catch((err) => {

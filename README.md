@@ -1,6 +1,6 @@
 <h1 align="center">sequelize + graphql 🧘🏽‍♂️</h1>
 <p>
-  <a href="https://www.npmjs.com/package/sequelize + graphql" target="_blank">
+  <a href="https://www.npmjs.com/package/sequelize+graphql" target="_blank">
     <img alt="Version" src="https://img.shields.io/npm/v/sequelize + graphql.svg">
   </a>
   <a href="LICENSE" target="_blank">
@@ -36,6 +36,3 @@ Give a ⭐️ if this project helped you!
 
 Copyright © 2020 [collinsmuriuki](https://github.com/collinsmuriuki).<br />
 This project is [MIT](LICENSE) licensed.
-
-***
-_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
