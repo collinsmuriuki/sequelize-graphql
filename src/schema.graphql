@@ -13,6 +13,7 @@ type Post {
   User: User!
   tags: [Tag!]!
   createdAt: String!
+  updatedAt: String!
 }
 
 type Tag {
@@ -31,8 +32,13 @@ input CreatePostInput {
   body: String!
 }
 
+enum OrderByType {
+  ASC
+  DESC
+}
+
 type Query {
-  users: [User!]!
+  users(limit: Int, offset: Int, order: OrderByType): [User!]!
   posts: [Post!]!
   tags: [Tag!]!
   getPostById(id: Int!): Post!
