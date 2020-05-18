@@ -67,9 +67,10 @@ const resolvers = {
 const server = new GraphQLServer({
   typeDefs: "./src/schema.graphql",
   resolvers,
-  context: {
+  context: (req) => ({
+    ...req,
     sequelize: sequelize.models,
-  },
+  }),
 });
 
 server.start({ port: 4002 }, () => {
