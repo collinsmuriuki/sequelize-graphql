@@ -50,12 +50,12 @@ const resolvers = {
 
   Mutation: {
     createUser: async (parent, { data }, { sequelize: { User } }) => {
-      const user = User.create({ ...data });
+      const user = await User.create({ ...data });
       return user;
     },
 
     createPost: async (parent, { UserId, data }, { sequelize: { Post } }) => {
-      const post = Post.create({
+      const post = await Post.create({
         UserId,
         ...data,
       });
