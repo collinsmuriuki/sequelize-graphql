@@ -11,14 +11,16 @@ type Post {
   title: String!
   body: String!
   User: User!
-  tags: [Tag!]!
+  comments: [Comment!]!
   createdAt: String!
   updatedAt: String!
 }
 
-type Tag {
+type Comment {
   id: ID!
-  name: String!
+  text: String!
+  User: User!
+  Post: Post!
 }
 
 input CreateUserInput {
@@ -40,8 +42,9 @@ enum OrderByType {
 type Query {
   users(limit: Int, offset: Int, order: OrderByType): [User!]!
   posts: [Post!]!
-  tags: [Tag!]!
+  comments: [Comment!]!
   getPostById(id: Int!): Post!
+  getUserById(id: Int!): User!
 }
 
 type Mutation {

@@ -1,5 +1,54 @@
 {
     "tables": {
+        "Comments": {
+            "tableName": "Comments",
+            "schema": {
+                "id": {
+                    "allowNull": false,
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "name": {
+                    "field": "name",
+                    "seqType": "Sequelize.STRING"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "field": "createdAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "field": "updatedAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "PostId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "Posts",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "PostId",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "UserId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "Users",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "UserId",
+                    "seqType": "Sequelize.INTEGER"
+                }
+            },
+            "indexes": []
+        },
         "Posts": {
             "tableName": "Posts",
             "schema": {
@@ -42,44 +91,6 @@
             },
             "indexes": []
         },
-        "Tags": {
-            "tableName": "Tags",
-            "schema": {
-                "id": {
-                    "allowNull": false,
-                    "primaryKey": true,
-                    "autoIncrement": true,
-                    "field": "id",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "name": {
-                    "field": "name",
-                    "seqType": "Sequelize.STRING"
-                },
-                "createdAt": {
-                    "allowNull": false,
-                    "field": "createdAt",
-                    "seqType": "Sequelize.DATE"
-                },
-                "updatedAt": {
-                    "allowNull": false,
-                    "field": "updatedAt",
-                    "seqType": "Sequelize.DATE"
-                },
-                "PostId": {
-                    "allowNull": true,
-                    "references": {
-                        "model": "Posts",
-                        "key": "id"
-                    },
-                    "onDelete": "SET NULL",
-                    "onUpdate": "CASCADE",
-                    "field": "PostId",
-                    "seqType": "Sequelize.INTEGER"
-                }
-            },
-            "indexes": []
-        },
         "Users": {
             "tableName": "Users",
             "schema": {
@@ -99,7 +110,12 @@
                     "seqType": "Sequelize.STRING"
                 },
                 "email": {
+                    "unique": true,
                     "field": "email",
+                    "seqType": "Sequelize.STRING"
+                },
+                "password": {
+                    "field": "password",
                     "seqType": "Sequelize.STRING"
                 },
                 "createdAt": {
@@ -116,5 +132,5 @@
             "indexes": []
         }
     },
-    "revision": 5
+    "revision": 1
 }

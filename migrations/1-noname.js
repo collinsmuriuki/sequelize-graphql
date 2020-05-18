@@ -7,14 +7,14 @@ var Sequelize = require('sequelize');
  *
  * createTable "Users", deps: []
  * createTable "Posts", deps: [Users]
- * createTable "Tags", deps: [Posts]
+ * createTable "Comments", deps: [Posts, Users]
  *
  **/
 
 var info = {
     "revision": 1,
     "name": "noname",
-    "created": "2020-05-03T12:42:33.468Z",
+    "created": "2020-05-18T18:55:15.646Z",
     "comment": ""
 };
 
@@ -41,7 +41,12 @@ var migrationCommands = function(transaction) {
                     },
                     "email": {
                         "type": Sequelize.STRING,
-                        "field": "email"
+                        "field": "email",
+                        "unique": true
+                    },
+                    "password": {
+                        "type": Sequelize.STRING,
+                        "field": "password"
                     },
                     "createdAt": {
                         "type": Sequelize.DATE,
@@ -109,7 +114,7 @@ var migrationCommands = function(transaction) {
         {
             fn: "createTable",
             params: [
-                "Tags",
+                "Comments",
                 {
                     "id": {
                         "type": Sequelize.INTEGER,
@@ -142,6 +147,17 @@ var migrationCommands = function(transaction) {
                             "key": "id"
                         },
                         "allowNull": true
+                    },
+                    "UserId": {
+                        "type": Sequelize.INTEGER,
+                        "field": "UserId",
+                        "onUpdate": "CASCADE",
+                        "onDelete": "SET NULL",
+                        "references": {
+                            "model": "Users",
+                            "key": "id"
+                        },
+                        "allowNull": true
                     }
                 },
                 {
@@ -154,13 +170,13 @@ var migrationCommands = function(transaction) {
 var rollbackCommands = function(transaction) {
     return [{
             fn: "dropTable",
-            params: ["Posts", {
+            params: ["Comments", {
                 transaction: transaction
             }]
         },
         {
             fn: "dropTable",
-            params: ["Tags", {
+            params: ["Posts", {
                 transaction: transaction
             }]
         },
