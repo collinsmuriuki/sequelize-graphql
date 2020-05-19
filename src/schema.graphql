@@ -41,8 +41,15 @@ type LoginOutput {
 }
 
 input CreatePostInput {
+  UserId: Int!
   title: String!
   body: String!
+}
+
+input CreateCommentInput {
+  UserId: Int!
+  PostId: Int!
+  text: String!
 }
 
 enum OrderByType {
@@ -56,10 +63,12 @@ type Query {
   comments: [Comment!]!
   getPostById(id: Int!): Post!
   getUserById(id: Int!): User!
+  getPostsByUserId(UserId: Int!): [Post!]!
 }
 
 type Mutation {
   signUp(data: CreateUserInput!): User!
   login(data: LoginInput): LoginOutput!
-  createPost(UserId: Int!, data: CreatePostInput!): Post!   
+  createPost(data: CreatePostInput!): Post!
+  createComment(data: CreateCommentInput): Comment! 
 }
