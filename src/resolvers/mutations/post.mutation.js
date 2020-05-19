@@ -4,6 +4,8 @@ export default {
     const post = await Post.create({
       ...data,
     });
+    
+    // NOTE: new post will not return comments ... duh!
     return post;
   },
 };
