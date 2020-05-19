@@ -1,6 +1,7 @@
 import { GraphQLServer } from "graphql-yoga";
 import jwt from "express-jwt";
 import cors from "cors";
+import morgan from "morgan";
 import bodyParser from "body-parser";
 import * as dotenv from "dotenv";
 
@@ -34,7 +35,9 @@ const server = new GraphQLServer({
   }),
 });
 
-server.express.use(authMiddleware)
+if (process.env.NODE_ENV === "development") server.express.use(morgan("tiny"));
+
+server.express.use(authMiddleware);
 server.express.use(bodyParser.json());
 server.express.use(cors());
 
