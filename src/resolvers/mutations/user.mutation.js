@@ -37,7 +37,16 @@ export default {
       const validPassword = await bcrypt.compare(password, user.password);
 
       if (validPassword) {
-        const token = jwt.sign({ user }, process.env.JWT_SECRET);
+        const token = jwt.sign(
+          {
+            user: {
+              firstName: user.firstName,
+              lastName: user.lastName,
+              email: user.email,
+            },
+          },
+          process.env.JWT_SECRET
+        );
 
         return { token, user };
       } else {

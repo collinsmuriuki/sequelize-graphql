@@ -1,7 +1,20 @@
 import { GraphQLServer } from "graphql-yoga";
+import jwt from "express-jwt";
+import cors from "cors";
+import bodyParser from "body-parser";
+import * as dotenv from "dotenv";
 
 import resolvers from "./resolvers/index";
 import { sequelize } from "../models";
+
+dotenv.config({
+  path: ".env",
+});
+
+const authMiddleware = jwt({
+  secret: process.env.JWT_SECRET,
+  credentialsRequired: false,
+});
 
 sequelize
   .authenticate()
@@ -16,10 +29,14 @@ const server = new GraphQLServer({
   typeDefs: "./src/schema.graphql",
   resolvers,
   context: (req) => ({
-    ...req,
+    req: req.request,
     sequelize: sequelize.models,
   }),
 });
+
+server.express.use(authMiddleware)
+server.express.use(bodyParser.json());
+server.express.use(cors());
 
 server.start({ port: 4002 }, () => {
   console.log("Server is running on port 4002");
