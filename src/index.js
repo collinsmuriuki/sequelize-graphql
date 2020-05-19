@@ -1,8 +1,7 @@
 import { GraphQLServer } from "graphql-yoga";
 
+import resolvers from "./resolvers/index";
 import { sequelize } from "../models";
-import RootQueries from "./resolvers/root-query";
-import RootMutations from "./resolvers/root-mutation";
 
 sequelize
   .authenticate()
@@ -12,16 +11,6 @@ sequelize
   .catch((err) => {
     console.error("Unable to connect to the database:", err);
   });
-
-const resolvers = {
-  Query: {
-    ...RootQueries,
-  },
-
-  Mutation: {
-    ...RootMutations,
-  },
-};
 
 const server = new GraphQLServer({
   typeDefs: "./src/schema.graphql",
