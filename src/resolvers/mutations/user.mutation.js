@@ -39,11 +39,10 @@ export default {
       if (validPassword) {
         const token = jwt.sign(
           {
-            user: {
-              firstName: user.firstName,
-              lastName: user.lastName,
-              email: user.email,
-            },
+            id: user.id,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
           },
           process.env.JWT_SECRET
         );
