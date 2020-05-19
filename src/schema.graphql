@@ -27,6 +27,17 @@ input CreateUserInput {
   firstName: String!
   lastName: String!
   email: String!
+  password: String!
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+type LoginOutput {
+  token: String!
+  user: User!
 }
 
 input CreatePostInput {
@@ -48,6 +59,7 @@ type Query {
 }
 
 type Mutation {
-  createUser(data: CreateUserInput!): User!
+  signUp(data: CreateUserInput!): User!
+  login(data: LoginInput): LoginOutput!
   createPost(UserId: Int!, data: CreatePostInput!): Post!   
 }

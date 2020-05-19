@@ -1,6 +1,8 @@
 import { GraphQLServer } from "graphql-yoga";
 
 import { sequelize } from "../models";
+import RootQueries from "./resolvers/root-query";
+import RootMutations from "./resolvers/root-mutation";
 
 sequelize
   .authenticate()
@@ -13,54 +15,11 @@ sequelize
 
 const resolvers = {
   Query: {
-    posts: async (parent, args, { sequelize: { Post } }) => {
-      const posts = await Post.findAll({ include: [{ all: true }] });
-      return posts;
-    },
-
-    users: async (parent, { limit, offset, order }, { sequelize: { User } }) => {
-      let users;
-
-      if (order) {
-        users = await User.findAll({
-          include: [{ all: true }],
-          limit, offset,
-          order: [["createdAt", order]],
-        });
-      } else {
-        users = await User.findAll({
-          include: [{ all: true }],
-          limit, offset,
-        });
-      }
-
-      return users;
-    },
-
-    getPostById: async (parent, { id }, { sequelize: { Post } }) => {
-      const post = await Post.findOne({
-        where: {
-          id,
-        },
-        include: [{ all: true }],
-      });
-      return post;
-    },
+    ...RootQueries,
   },
 
   Mutation: {
-    createUser: async (parent, { data }, { sequelize: { User } }) => {
-      const user = await User.create({ ...data });
-      return user;
-    },
-
-    createPost: async (parent, { UserId, data }, { sequelize: { Post } }) => {
-      const post = await Post.create({
-        UserId,
-        ...data,
-      });
-      return post;
-    },
+    ...RootMutations,
   },
 };
 
