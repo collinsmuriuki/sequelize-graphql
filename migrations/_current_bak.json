@@ -10,8 +10,8 @@
                     "field": "id",
                     "seqType": "Sequelize.INTEGER"
                 },
-                "text": {
-                    "field": "text",
+                "name": {
+                    "field": "name",
                     "seqType": "Sequelize.STRING"
                 },
                 "createdAt": {
@@ -132,5 +132,5 @@
             "indexes": []
         }
     },
-    "revision": 2
+    "revision": 1
 }
