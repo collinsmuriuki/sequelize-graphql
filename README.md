@@ -1,14 +1,11 @@
 <h1 align="center">sequelize + graphql 🧘🏽‍♂️</h1>
 <p>
-  <a href="https://www.npmjs.com/package/sequelize+graphql" target="_blank">
-    <img alt="Version" src="https://img.shields.io/npm/v/sequelize + graphql.svg">
-  </a>
   <a href="LICENSE" target="_blank">
     <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
   </a>
 </p>
 
-> testing out a graphql server with sequelize and graphql-yoga
+> A graphql server built with nodejs, sequelize and graphql-yoga. This is very exprimental and a lot of rules have been bent to achieve some feats. However, everything works as it should.
 
 ## Install
 
@@ -20,6 +17,99 @@ npm install
 
 ```sh
 npm start
+```
+
+## Schema
+```ts
+type User {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  email: String!
+  posts: [Post!]!
+}
+
+type Post {
+  id: ID!
+  title: String!
+  body: String!
+  User: User!
+  comments: [Comment!]!
+  createdAt: String!
+  updatedAt: String!
+}
+
+type Comment {
+  id: ID!
+  text: String!
+  User: User!
+  Post: Post!
+}
+
+input CreateUserInput {
+  firstName: String!
+  lastName: String!
+  email: String!
+  password: String!
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+type LoginOutput {
+  token: String!
+  user: User!
+}
+
+input CreatePostInput {
+  UserId: Int!
+  title: String!
+  body: String!
+}
+
+input CreateCommentInput {
+  UserId: Int!
+  PostId: Int!
+  text: String!
+}
+
+enum OrderByType {
+  ASC
+  DESC
+}
+
+input UpdateUserProfileInput {
+  userId: ID!
+  firstName: String!
+  lastName: String!
+  email: String!
+}
+
+input UpdatePasswordInput {
+  userId: ID!
+  oldPassword: String!
+  newPassword: String!
+}
+
+type Query {
+  users(limit: Int, offset: Int, order: OrderByType): [User!]!
+  posts(limit: Int, offset: Int, order: OrderByType): [Post!]!
+  comments(limit: Int, offset: Int, order: OrderByType): [Comment!]!
+  getPostById(id: Int!): Post!
+  getUserById(id: Int!): User!
+  getPostsByUserId(UserId: Int!, order: OrderByType): [Post!]!
+}
+
+type Mutation {
+  signUp(data: CreateUserInput!): User!
+  login(data: LoginInput): LoginOutput!
+  createPost(data: CreatePostInput!): Post!
+  createComment(data: CreateCommentInput): Comment!
+  updateUserProfile(data: UpdateUserProfileInput!): User!
+  changePassword(data: UpdatePasswordInput!): User!
+}
 ```
 
 ## Author
