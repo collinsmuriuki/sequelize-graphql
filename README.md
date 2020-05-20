@@ -19,6 +19,12 @@ npx sequelize-cli db:create
 npx sequelize-cli db:migrate
 ```
 
+## Environmental variable
+Replace yoursupersecuresecret with whatever key you would like to use
+```sh
+echo JWT_SECRET=yoursupersecuresecret > .env
+```
+
 ## Usage
 
 ```sh
