@@ -1,6 +1,6 @@
 export default {
   posts: async (parent, { limit, offset, order }, { sequelize }) => {
-      const { Post } = sequelize;
+    const { Post } = sequelize;
     let posts;
 
     if (order) {
@@ -25,7 +25,7 @@ export default {
       where: {
         id,
       },
-      include: [{ all: true }],
+      include: [{ all: true, nested: true }],
     });
     return post;
   },
