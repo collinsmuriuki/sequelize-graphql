@@ -12,6 +12,8 @@ dotenv.config({
   path: ".env",
 });
 
+const port = process.env.PORT || 4002;
+
 const authMiddleware = jwt({
   secret: process.env.JWT_SECRET,
   credentialsRequired: false,
@@ -41,6 +43,6 @@ server.express.use(authMiddleware);
 server.express.use(bodyParser.json());
 server.express.use(cors());
 
-server.start({ port: 4002 }, () => {
-  console.log("Server is running on port 4002");
+server.start({ port }, () => {
+  console.log(`Server is running: https://localhost:${port}`);
 });
