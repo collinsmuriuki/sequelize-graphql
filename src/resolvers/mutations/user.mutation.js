@@ -55,4 +55,26 @@ export default {
       throw new Error(error);
     }
   },
+
+  updateUserProfile: async (parent, { data }, { sequelize, req }) => {
+    const { firstName, lastName, email, userId } = data;
+    const { User } = sequelize;
+    if (!req.user || req.user.id != userId) throw new Error("Unauthorized");
+    try {
+      const userInstance = await User.findByPk(userId);
+      userInstance.firstName = firstName;
+      userInstance.lastName = lastName;
+      userInstance.email = email;
+      await userInstance.save();
+      const user = await User.findOne({
+        where: {
+          id: userId,
+        },
+        include: [{ all: true, nested: true }],
+      });
+      return user;
+    } catch (error) {
+      throw new Error(error);
+    }
+  },
 };
