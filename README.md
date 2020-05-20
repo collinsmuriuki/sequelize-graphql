@@ -5,12 +5,18 @@
   </a>
 </p>
 
-> A graphql server built with nodejs, sequelize and graphql-yoga. This is very exprimental and a lot of rules have been bent to achieve some feats. However, everything works as it should.
+> A graphql server with jwt authentication built with nodejs, sequelize + postgres and graphql-yoga. This is very exprimental and a lot of rules have been bent to achieve some feats. However, everything works as it should.
 
 ## Install
 
 ```sh
 npm install
+```
+
+## Create database and migrate
+```sh
+npx sequelize-cli db:create
+npx sequelize-cli db:migrate
 ```
 
 ## Usage
@@ -114,7 +120,7 @@ type Mutation {
 
 ## Author
 
-👤 **collinsmuriuki**
+🧑🏾‍💻 **collinsmuriuki**
 
 * Github: [@collinsmuriuki](https://github.com/collinsmuriuki)
 
