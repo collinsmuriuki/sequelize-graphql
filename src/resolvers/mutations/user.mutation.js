@@ -91,7 +91,6 @@ export default {
       if (!valid) throw new Error("Old password does not match!");
       // store new hash
       userInstance.password = await bcrypt.hash(newPassword, 10);
-      console.log(userInstance.password)
       await userInstance.save();
       const user = await User.findOne({
         where: {
