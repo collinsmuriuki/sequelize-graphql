@@ -44,5 +44,5 @@ server.express.use(bodyParser.json());
 server.express.use(cors());
 
 server.start({ port }, () => {
-  console.log(`Server is running: https://localhost:${port}`);
+  console.log(`Server is running: http://localhost:${port}`);
 });
