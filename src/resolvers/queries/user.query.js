@@ -4,14 +4,14 @@ export default {
     try {
       if (order) {
         users = await User.findAll({
-          include: [{ all: true }],
+          include: [{ all: true, nested: true }],
           limit,
           offset,
           order: [["createdAt", order]],
         });
       } else {
         users = await User.findAll({
-          include: [{ all: true }],
+          include: [{ all: true, nested: true }],
           limit,
           offset,
         });
