@@ -13,6 +13,11 @@
       "*": [
         "node_modules/*"
       ]
-    }
-  }
+    },
+    "resolveJsonModule": true,
+  },
+  "include": [
+    "package.json",
+    "config/config.json"
+  ]
 }
