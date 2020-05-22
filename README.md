@@ -28,7 +28,7 @@ echo JWT_SECRET=yoursupersecuresecret > .env
 ## Usage
 
 ```sh
-npm start
+npm run dev
 ```
 
 ## Schema

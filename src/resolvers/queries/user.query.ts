@@ -1,5 +1,5 @@
 export default {
-  users: async (parent, { limit, offset, order }, { sequelize: { User } }) => {
+  users: async (_parent, { limit, offset, order }, { sequelize: { User } }) => {
     let users;
     try {
       if (order) {
