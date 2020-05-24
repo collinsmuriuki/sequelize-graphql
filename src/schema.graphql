@@ -23,7 +23,7 @@ type Comment {
   Post: Post!
 }
 
-input CreateUserInput {
+input SignUpInput {
   firstName: String!
   lastName: String!
   email: String!
@@ -80,10 +80,10 @@ type Query {
 }
 
 type Mutation {
-  signUp(data: CreateUserInput!): User!
-  login(data: LoginInput): LoginOutput!
+  signUp(data: SignUpInput!): User!
+  login(data: LoginInput!): LoginOutput!
   createPost(data: CreatePostInput!): Post!
-  createComment(data: CreateCommentInput): Comment!
+  createComment(data: CreateCommentInput!): Comment!
   updateUserProfile(data: UpdateUserProfileInput!): User!
   changePassword(data: UpdatePasswordInput!): User!
 }
