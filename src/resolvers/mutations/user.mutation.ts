@@ -7,10 +7,10 @@ dotenv.config({
 });
 
 export default {
-  signUp: async (parent, { data }, { sequelize: { User } }) => {
+  signUp: async (_parent, { data }, { sequelize: { User } }) => {
     const { firstName, lastName, email, password } = data;
     try {
-      const hashedPassword = await bcrypt.hash(password, 10);
+      const hashedPassword: string = await bcrypt.hash(password, 10);
       const user = User.create({
         firstName,
         lastName,
@@ -23,7 +23,7 @@ export default {
     }
   },
 
-  login: async (parent, { data }, { sequelize: { User } }) => {
+  login: async (_parent, { data }, { sequelize: { User } }) => {
     const { email, password } = data;
     try {
       const user = await User.findOne({
@@ -37,7 +37,7 @@ export default {
       const validPassword = await bcrypt.compare(password, user.password);
 
       if (validPassword) {
-        const token = jwt.sign(
+        const token: string = jwt.sign(
           {
             id: user.id,
             firstName: user.firstName,
@@ -56,7 +56,7 @@ export default {
     }
   },
 
-  updateUserProfile: async (parent, { data }, { sequelize, req }) => {
+  updateUserProfile: async (_parent, { data }, { sequelize, req }) => {
     const { firstName, lastName, email, userId } = data;
     const { User } = sequelize;
     if (!req.user || req.user.id != userId) throw new Error("Unauthorized");
@@ -78,7 +78,7 @@ export default {
     }
   },
 
-  changePassword: async (parent, { data }, { sequelize, req }) => {
+  changePassword: async (_parent, { data }, { sequelize, req }) => {
     const { oldPassword, newPassword, userId } = data;
     const { User } = sequelize;
     if (!req.user || req.user.id != userId) throw new Error("Unauthorized");

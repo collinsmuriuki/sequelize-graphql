@@ -1,7 +1,7 @@
 export default {
-  posts: async (parent, { limit, offset, order }, { sequelize }) => {
+  posts: async (_parent, { limit, offset, order }, { sequelize }) => {
     const { Post } = sequelize;
-    let posts;
+    let posts: [];
     try {
       if (order) {
         posts = await Post.findAll({
@@ -23,9 +23,9 @@ export default {
     }
   },
 
-  getPostById: async (parent, { id }, { sequelize: { Post } }) => {
+  getPostById: async (_parent, { id }, { sequelize: { Post } }) => {
     try {
-      const post = await Post.findOne({
+      const post: {} = await Post.findOne({
         where: {
           id,
         },

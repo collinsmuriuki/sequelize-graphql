@@ -1,5 +1,5 @@
 export default {
-  createComment: async (parent, { data }, { sequelize, req }) => {
+  createComment: async (_parent, { data }, { sequelize, req }) => {
     const { Comment } = sequelize;
     if (!req.user || req.user.id !== data.UserId)
       throw new Error("Unauthorized");
@@ -7,7 +7,7 @@ export default {
       const comment = await Comment.create({
         ...data,
       });
-      const result = await Comment.findOne({
+      const result: {} = await Comment.findOne({
         where: {
           id: comment.id,
         },

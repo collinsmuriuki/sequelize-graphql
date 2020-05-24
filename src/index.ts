@@ -12,7 +12,7 @@ dotenv.config({
   path: ".env",
 });
 
-const port = process.env.PORT || 4002;
+const port: number | any = process.env.PORT || 4002;
 
 const authMiddleware = jwt({
   secret: process.env.JWT_SECRET,

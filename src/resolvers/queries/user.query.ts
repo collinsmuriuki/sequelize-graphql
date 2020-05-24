@@ -1,6 +1,6 @@
 export default {
   users: async (_parent, { limit, offset, order }, { sequelize: { User } }) => {
-    let users;
+    let users: [];
     try {
       if (order) {
         users = await User.findAll({

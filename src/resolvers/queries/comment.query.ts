@@ -1,5 +1,5 @@
 export default {
-  comments: async (parent, args, { sequelize: { Comment }, req }) => {
+  comments: async (_parent, _args, { sequelize: { Comment }, req }) => {
     try {
       const comments = await Comment.findAll({ include: [{ all: true }] });
       return comments;
