@@ -5,7 +5,7 @@ import morgan from "morgan";
 import bodyParser from "body-parser";
 import * as dotenv from "dotenv";
 
-import resolvers from "./resolvers/index";
+import schema from "./schema";
 import { sequelize } from "../models";
 
 dotenv.config({
@@ -29,8 +29,7 @@ sequelize
   });
 
 const server = new GraphQLServer({
-  typeDefs: "./src/schema.graphql",
-  resolvers,
+  schema,
   context: (req) => ({
     req: req.request,
     sequelize: sequelize.models,

@@ -10,7 +10,7 @@
     "db:makemigrations": "./node_modules/sequelize-auto-migrations/bin/makemigration.js",
     "db:runmigrations": "npx sequelize-cli db:migrate",
     "tsc": "tsc",
-    "dev": "ts-node-dev --respawn --transpileOnly ./src/index.ts"
+    "dev": "ts-node-dev --respawn --transpileOnly -r graphql-import-node/register ./src/index.ts"
   },
   "keywords": [],
   "author": "collinsmuriuki",
@@ -20,6 +20,8 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-jwt": "^5.3.3",
+    "graphql-import-node": "0.0.4",
+    "graphql-tools": "^6.0.1",
     "graphql-yoga": "^1.16.7",
     "http-errors": "^1.7.3",
     "jsonwebtoken": "^8.5.1",
