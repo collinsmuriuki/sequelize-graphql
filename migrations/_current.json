@@ -24,7 +24,7 @@
                     "field": "updatedAt",
                     "seqType": "Sequelize.DATE"
                 },
-                "PostId": {
+                "postId": {
                     "allowNull": true,
                     "references": {
                         "model": "Posts",
@@ -32,10 +32,10 @@
                     },
                     "onDelete": "SET NULL",
                     "onUpdate": "CASCADE",
-                    "field": "PostId",
+                    "field": "postId",
                     "seqType": "Sequelize.INTEGER"
                 },
-                "UserId": {
+                "userId": {
                     "allowNull": true,
                     "references": {
                         "model": "Users",
@@ -43,7 +43,7 @@
                     },
                     "onDelete": "SET NULL",
                     "onUpdate": "CASCADE",
-                    "field": "UserId",
+                    "field": "userId",
                     "seqType": "Sequelize.INTEGER"
                 }
             },
@@ -77,7 +77,7 @@
                     "field": "updatedAt",
                     "seqType": "Sequelize.DATE"
                 },
-                "UserId": {
+                "userId": {
                     "allowNull": true,
                     "references": {
                         "model": "Users",
@@ -85,7 +85,7 @@
                     },
                     "onDelete": "SET NULL",
                     "onUpdate": "CASCADE",
-                    "field": "UserId",
+                    "field": "userId",
                     "seqType": "Sequelize.INTEGER"
                 }
             },
@@ -132,5 +132,5 @@
             "indexes": []
         }
     },
-    "revision": 2
+    "revision": 7
 }

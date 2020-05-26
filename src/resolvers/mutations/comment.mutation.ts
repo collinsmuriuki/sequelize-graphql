@@ -1,7 +1,7 @@
 export default {
   createComment: async (_parent, { data }, { sequelize, req }) => {
     const { Comment } = sequelize;
-    if (!req.user || req.user.id !== data.UserId)
+    if (!req.user || req.user.id !== data.userId)
       throw new Error("Unauthorized");
     try {
       const comment = await Comment.create({
