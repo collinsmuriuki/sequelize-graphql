@@ -48,7 +48,7 @@ input CreatePostInput {
 
 input CreateCommentInput {
   userId: Int!
-  PostId: Int!
+  postId: Int!
   text: String!
 }
 
