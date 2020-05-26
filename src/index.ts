@@ -34,9 +34,8 @@ const server = new GraphQLServer({
   }),
 });
 
-
+// middleware
 server.express.use(authMiddleware);
-server.express.use(bodyParser.json());
 
 server.start({ port }, () => {
   console.log(`Server is running: http://localhost:${port}`);
