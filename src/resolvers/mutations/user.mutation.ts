@@ -49,7 +49,7 @@ export default {
 
         return { token, user };
       } else {
-        throw new Error("Wrong password");
+        throw new Error("Wrong email or password");
       }
     } catch (error) {
       throw new Error(error.toString());
