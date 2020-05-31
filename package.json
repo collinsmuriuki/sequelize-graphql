@@ -10,7 +10,9 @@
     "db:makemigrations": "./node_modules/sequelize-auto-migrations/bin/makemigration.js",
     "db:runmigrations": "npx sequelize-cli db:migrate",
     "tsc": "tsc",
-    "dev": "ts-node-dev --respawn --transpileOnly -r graphql-import-node/register ./src/index.ts"
+    "server": "ts-node-dev --respawn --transpileOnly -r graphql-import-node/register ./src/index.ts",
+    "client": "cd client && npm start",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
   },
   "keywords": [],
   "author": "collinsmuriuki",
@@ -32,6 +34,7 @@
   "devDependencies": {
     "@types/graphql": "^14.5.0",
     "@types/node": "^14.0.1",
+    "concurrently": "^5.2.0",
     "nodemon": "^2.0.3",
     "sequelize-auto-migrations": "github:scimonster/sequelize-auto-migrations",
     "ts-node-dev": "^1.0.0-pre.44",
