@@ -1,6 +1,6 @@
 import { GraphQLServer } from "graphql-yoga";
 import jwt from "express-jwt";
-import bodyParser from "body-parser";
+import cors from "cors";
 import * as dotenv from "dotenv";
 
 import schema from "./schema";
@@ -16,6 +16,11 @@ const authMiddleware = jwt({
   secret: process.env.JWT_SECRET,
   credentialsRequired: false,
 });
+
+const corsOptions = {
+  origin: "http://localhost:3000",
+  credentials: true,
+};
 
 sequelize
   .authenticate()
@@ -37,6 +42,6 @@ const server = new GraphQLServer({
 // middleware
 server.express.use(authMiddleware);
 
-server.start({ port }, () => {
+server.start({ port, cors: corsOptions }, () => {
   console.log(`Server is running: http://localhost:${port}`);
 });
