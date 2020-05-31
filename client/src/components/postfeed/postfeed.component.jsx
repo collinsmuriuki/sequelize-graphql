@@ -10,8 +10,8 @@ const LinkMod = styled(Link)`
 const PostFeed = ({ posts }) => {
   return (
     <Feed size="large">
-      <Feed.Event>
-        {posts.map((post) => (
+      {posts.map((post) => (
+        <Feed.Event style={{ padding: "1rem" }}>
           <Feed.Content key={post.id}>
             <Feed.Summary>
               <LinkMod to={`/post/${post.id}`}>
@@ -21,7 +21,7 @@ const PostFeed = ({ posts }) => {
                 {post.user.firstName} {post.user.lastName}
               </small>
               <Feed.Date>
-                {new Date(post.createdAt).toLocaleDateString()}
+                {new Date(Number(post.createdAt)).toLocaleDateString()}
               </Feed.Date>
             </Feed.Summary>
             <Feed.Extra text>{post.body}</Feed.Extra>
@@ -32,8 +32,8 @@ const PostFeed = ({ posts }) => {
               </Feed.Like>
             </Feed.Meta>
           </Feed.Content>
-        ))}
-      </Feed.Event>
+        </Feed.Event>
+      ))}
     </Feed>
   );
 };

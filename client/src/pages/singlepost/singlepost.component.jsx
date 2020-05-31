@@ -37,7 +37,7 @@ const SinglePost = ({ match }) => {
   console.log(data);
   return (
     <>
-      <Hero icon="bolt" headerMessage={data.getPostById.title} />
+      <Hero icon="book" headerMessage={data.getPostById.title} />
       <Author user={data.getPostById.user} />
       <Post post={data.getPostById} />
     </>

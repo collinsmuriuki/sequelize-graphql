@@ -11,7 +11,7 @@ const ButtonMod = styled(Button)`
 export default class PostForm extends Component {
   render() {
     return (
-      <Modal trigger={<ButtonMod>Show Modal</ButtonMod>} centered={false}>
+      <Modal trigger={<ButtonMod>Create Post</ButtonMod>} centered={false}>
         <Modal.Header>Create Post</Modal.Header>
         <Modal.Content>
           <Form onSubmit={() => console.log("cc")}>
