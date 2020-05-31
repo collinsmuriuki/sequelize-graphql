@@ -11,8 +11,8 @@ const PostFeed = ({ posts }) => {
   return (
     <Feed size="large">
       {posts.map((post) => (
-        <Feed.Event style={{ padding: "1rem" }}>
-          <Feed.Content key={post.id}>
+        <Feed.Event key={post.id} style={{ padding: "1rem" }}>
+          <Feed.Content>
             <Feed.Summary>
               <LinkMod to={`/post/${post.id}`}>
                 <strong>{post.title}</strong>
