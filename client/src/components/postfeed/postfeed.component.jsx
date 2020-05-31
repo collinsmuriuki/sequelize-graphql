@@ -14,7 +14,7 @@ const PostFeed = ({ posts }) => {
         {posts.map((post) => (
           <Feed.Content key={post.id}>
             <Feed.Summary>
-              <LinkMod>
+              <LinkMod to={`/post/${post.id}`}>
                 <strong>{post.title}</strong>
               </LinkMod>
               <small>
