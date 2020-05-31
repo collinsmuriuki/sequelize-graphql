@@ -19,4 +19,10 @@ const client = new ApolloClient({
   cache,
 });
 
+client.writeData({
+  data: {
+    currentUser: null,
+  },
+});
+
 export default client;
