@@ -3,6 +3,8 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 import { persistCache } from "apollo-cache-persist";
 import { ApolloClient } from "apollo-boost";
 
+import { resolvers } from "./resolvers";
+
 const httpLink = createHttpLink({
   uri: "http://localhost:4002",
 });
@@ -17,6 +19,7 @@ persistCache({
 const client = new ApolloClient({
   link: httpLink,
   cache,
+  resolvers,
 });
 
 client.writeData({
