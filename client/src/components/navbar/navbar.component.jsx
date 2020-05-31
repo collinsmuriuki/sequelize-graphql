@@ -35,7 +35,7 @@ const Navbar = ({ currentUser }) => {
             </Button>
           </>
         ) : (
-          <LinkMod to="/">
+          <LinkMod to="/auth">
             <Menu.Item name="sign up" />
           </LinkMod>
         )}
