@@ -1,7 +1,7 @@
-import React from 'react';
-import { Container } from "semantic-ui-react"
+import React from "react";
+import { Container } from "semantic-ui-react";
 
-import Navbar from "./components/navbar.component";
+import { default as Navbar } from "./components/navbar/navbar.container";
 
 function App() {
   return (
