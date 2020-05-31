@@ -9,13 +9,11 @@ import * as serviceWorker from "./serviceWorker";
 import client from "./graphql/config";
 
 ReactDOM.render(
-  <React.StrictMode>
     <ApolloProvider client={client}>
       <BrowserRouter>
         <App />
       </BrowserRouter>
-    </ApolloProvider>
-  </React.StrictMode>,
+    </ApolloProvider>,
   document.getElementById("root")
 );
 
