@@ -1,7 +1,6 @@
 import React from "react";
-import { Input, Menu, Button } from "semantic-ui-react";
-import { Link } from "react-router-dom";
-
+import { Input, Menu } from "semantic-ui-react";
+import { Link, withRouter } from "react-router-dom";
 import styled from "styled-components";
 
 const LinkMod = styled(Link)`
@@ -12,7 +11,7 @@ const LinkMod = styled(Link)`
   }
 `;
 
-const Navbar = ({ currentUser }) => {
+const Navbar = ({ currentUser, history }) => {
   return (
     <Menu secondary>
       <LinkMod to="/">
@@ -30,9 +29,14 @@ const Navbar = ({ currentUser }) => {
             <LinkMod to="/">
               <Menu.Item name="profile" />
             </LinkMod>
-            <Button>
-              <Menu.Item name="logout" />
-            </Button>
+
+            <Menu.Item
+              name="logout"
+              onClick={() => {
+                localStorage.clear();
+                window.location.reload();
+              }}
+            />
           </>
         ) : (
           <LinkMod to="/auth">
@@ -44,4 +48,4 @@ const Navbar = ({ currentUser }) => {
   );
 };
 
-export default Navbar;
+export default withRouter(Navbar);

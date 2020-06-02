@@ -1,7 +1,7 @@
 import { createHttpLink } from "apollo-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
-import { persistCache } from "apollo-cache-persist";
 import { ApolloClient } from "apollo-boost";
+import { persistCache } from 'apollo-cache-persist';
 import { setContext } from "apollo-link-context";
 
 import { resolvers } from "./resolvers";
@@ -37,7 +37,7 @@ const client = new ApolloClient({
 
 client.writeData({
   data: {
-    currentUser: null,
+    currentUser: localStorage.getItem("user"),
   },
 });
 

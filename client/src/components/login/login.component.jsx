@@ -1,20 +1,90 @@
-import React from "react";
+import React, { useState } from "react";
+import { withRouter } from "react-router-dom";
+import { useMutation } from "@apollo/react-hooks";
+import { gql } from "apollo-boost";
 import { Button, Form } from "semantic-ui-react";
 
-const Login = () => {
+const LOGIN = gql`
+  mutation($data: LoginInput!) {
+    login(data: $data) {
+      token
+      user {
+        id
+        firstName
+        lastName
+        email
+      }
+    }
+  }
+`;
+
+const SET_CURRENT_USER = gql`
+  mutation($user: LoginOutput!) {
+    setCurrentUser(user: $user) @client
+  }
+`;
+
+const Login = ({ history }) => {
+  const [credentials, setCredentials] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [setCurrentUser] = useMutation(SET_CURRENT_USER);
+
+  const [login, { loading, error }] = useMutation(LOGIN, {
+    onCompleted({ login }) {
+      localStorage.setItem("token", login.token);
+      setCurrentUser({ variables: { user: login.user } })
+      history.push("/");
+    }
+  });
+
+  const handleChange = (event) => {
+    const { value, name } = event.target;
+    setCredentials({ ...credentials, [name]: value });
+  };
+
+  const handleSubmit = async (event) => {
+    try {
+      event.preventDefault();
+      login({ variables: { data: credentials } });
+      setCredentials({
+        email: "",
+        password: "",
+      });
+    } catch (error) {
+      console.error("Error", error);
+    }
+  };
+
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
+      {error && <span>An error occurred</span>}
       <Form.Field>
         <label>Email</label>
-        <input placeholder="First Name" />
+        <input
+          onChange={handleChange}
+          placeholder="First Name"
+          name="email"
+          value={credentials.email}
+        />
       </Form.Field>
       <Form.Field>
         <label>Password</label>
-        <input type="password" placeholder="Password" />
+        <input
+          onChange={handleChange}
+          type="password"
+          placeholder="Password"
+          name="password"
+          value={credentials.password}
+        />
       </Form.Field>
-      <Button type="submit">Login</Button>
+      <Button loading={loading ? true : false} type="submit">
+        Login
+      </Button>
     </Form>
   );
 };
 
-export default Login;
+export default withRouter(Login);

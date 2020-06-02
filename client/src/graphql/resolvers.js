@@ -20,5 +20,18 @@ export const resolvers = {
 
       return currentUser;
     },
+
+    resetCurrentUser: async (_parent, _args, { cache }) => {
+      const { currentUser } = cache.readQuery({
+        query: GET_CURRENT_USER,
+      });
+
+      cache.writeQuery({
+        query: GET_CURRENT_USER,
+        data: { currentUser: null },
+      });
+
+      return currentUser;
+    },
   },
 };
