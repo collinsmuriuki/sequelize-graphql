@@ -33,7 +33,7 @@ const Login = ({ history }) => {
 
   const [setCurrentUser] = useMutation(SET_CURRENT_USER);
 
-  const [login, { loading }] = useMutation(LOGIN, {
+  const [login, { loading, error }] = useMutation(LOGIN, {
     onCompleted({ login }) {
       localStorage.setItem("token", login.token);
       setCurrentUser({ variables: { user: login.user } });
@@ -66,7 +66,7 @@ const Login = ({ history }) => {
     <Form onSubmit={handleSubmit}>
       {formError && (
         <Message negative>
-          <p>Wrong email or password</p>
+          <p>{error ? error.toString() : "Wrong email or password"}</p>
         </Message>
       )}
       <Form.Field>
