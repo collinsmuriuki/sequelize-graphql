@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import { useMutation } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
-import { Button, Form } from "semantic-ui-react";
+import { Button, Form, Message } from "semantic-ui-react";
 
 const LOGIN = gql`
   mutation($data: LoginInput!) {
@@ -29,15 +29,19 @@ const Login = ({ history }) => {
     email: "",
     password: "",
   });
+  const [formError, setFormError] = useState(false);
 
   const [setCurrentUser] = useMutation(SET_CURRENT_USER);
 
-  const [login, { loading, error }] = useMutation(LOGIN, {
+  const [login, { loading }] = useMutation(LOGIN, {
     onCompleted({ login }) {
       localStorage.setItem("token", login.token);
-      setCurrentUser({ variables: { user: login.user } })
+      setCurrentUser({ variables: { user: login.user } });
       history.push("/");
-    }
+    },
+    onError({ error }) {
+      setFormError(true);
+    },
   });
 
   const handleChange = (event) => {
@@ -60,7 +64,11 @@ const Login = ({ history }) => {
 
   return (
     <Form onSubmit={handleSubmit}>
-      {error && <span>An error occurred</span>}
+      {formError && (
+        <Message negative>
+          <p>Wrong email or password</p>
+        </Message>
+      )}
       <Form.Field>
         <label>Email</label>
         <input
