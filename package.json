@@ -25,6 +25,7 @@
     "graphql-import-node": "0.0.4",
     "graphql-tools": "^6.0.1",
     "graphql-yoga": "^1.16.7",
+    "helmet": "^3.22.0",
     "http-errors": "^1.7.3",
     "jsonwebtoken": "^8.5.1",
     "pg": "^8.0.3",

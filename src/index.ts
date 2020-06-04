@@ -1,6 +1,6 @@
 import { GraphQLServer } from "graphql-yoga";
 import jwt from "express-jwt";
-import cors from "cors";
+import helmet from "helmet";
 import * as dotenv from "dotenv";
 
 import schema from "./schema";
@@ -41,6 +41,7 @@ const server = new GraphQLServer({
 
 // middleware
 server.express.use(authMiddleware);
+server.express.use(helmet());
 
 server.start({ port, cors: corsOptions }, () => {
   console.log(`Server is running: http://localhost:${port}`);
